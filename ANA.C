@@ -1,0 +1,82 @@
+#include<graphics.h>
+#include<stdio.h>
+#include<dos.h>
+void  main()
+{
+int gd=DETECT,gm,x,y,p,q,cord[70][2]={
+					{320,70},
+					{334,76},
+					{352,82},
+					{374,88},
+					{396,94},
+					{410,110},
+					{419,119},
+					{428,128},
+					{437,140},
+					{446,152},
+					{450,162},
+					{456,179},
+					{462,191},
+					{468,208},
+					{472,224},
+					{479,240},
+					{470,250},
+					{460,260},
+					{450,270},					{456,300},
+					{440,280},
+					{430,290},
+					{420,300},
+					{410,310},
+					{400,320},
+					{390,330},
+					{380,340},
+					{370,350},
+					{360,360},
+					{350,370},
+					{320,390}
+				};
+initgraph(&gd,&gm,"");
+cleardevice();
+setcolor(LIGHTGRAY);
+setbkcolor(WHITE);
+//circle(320,240,180);
+//circle(320,240,185);
+//setfillstyle(CLOSE_DOT_FILL,LIGHTRED);
+//floodfill(503,423,LIGHTRED);
+circle(320,240,5);
+setfillstyle(SOLID_FILL,LIGHTGRAY);
+floodfill(320,240,LIGHTGRAY);
+settextstyle(3,0,3);
+outtextxy(308,60,"12");
+outtextxy(315,390,"6");
+outtextxy(480,220,"3");
+outtextxy(150,225,"9");
+outtextxy(400,85,"1");
+outtextxy(455,145,"2");
+outtextxy(456,305,"4");
+outtextxy(400,365,"5");
+outtextxy(175,305,"8");
+outtextxy(227,365,"7");
+outtextxy(165,145,"10");
+outtextxy(220,85,"11");
+setlinestyle(SOLID_LINE,2,2);
+line(320,240,320,80);
+p=0;
+q=0;
+delay(580);
+while(q<30)
+{
+   delay(590);
+   setcolor(WHITE);
+   line(320,240,cord[p][0],cord[p][1]);
+   setcolor(LIGHTGRAY);
+   p++;
+   line(320,240,cord[p][0],cord[p][1]);
+
+   q++;
+}
+
+getchar();
+closegraph();
+restorecrtmode();
+}

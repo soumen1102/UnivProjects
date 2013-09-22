@@ -1,0 +1,298 @@
+#include<stdio.h>
+#include<graphics.h>
+#include<dos.h>
+void bricks(int posx,int posy,int *flag2);
+//int end(int ex,int ey,int x,int y);
+void main()
+{
+int gd=DETECT,gm,x,y,x1,y1,ff,yy,flag=0,flag2=0,ch,usr,x11=0,mid=0;
+int hh=0,line1=280,line0=360;
+initgraph(&gd,&gm,"");
+x1=getmaxx();
+y1=getmaxy();
+x=630/2;
+y=y1/2;
+x1=20;
+setcolor(WHITE);
+setbkcolor(YELLOW);
+	setcolor(RED);
+	settextstyle(5,0,5);
+	settextjustify(CENTER_TEXT,CENTER_TEXT);
+	setlinestyle(SOLID_LINE,1,3);
+	outtextxy(getmaxx()/2,getmaxy()/2,"Pinball Where the Fun begins...hit it");
+	getch();
+	cleardevice();
+	setcolor(WHITE);
+	setcolor(WHITE);
+	setbkcolor(BLACK);
+    while(1)
+    {
+       if(hh==600)
+	{
+	clearviewport();
+	hh=0;
+	}
+	setlinestyle(SOLID_LINE,1,1);
+	setcolor(YELLOW);
+	rectangle(1,1,639,480);
+	//setfillstyle(CLOSE_DOT_FILL,LIGHTRED);
+	//floodfill(1,1,LIGHTRED);
+	bricks(x,y,&flag);
+	setcolor(WHITE);
+	settextstyle(4,0,4);
+	settextjustify(CENTER_TEXT,CENTER_TEXT);
+	outtextxy(getmaxx()/2,getmaxy()/2,"Designed by : Soumen mukherjee");
+	setcolor(WHITE);
+	circle(x,y,7);
+	setcolor(CYAN);
+	circle(x,y,6);
+	setcolor(YELLOW);
+	circle(x,y,5);
+	setcolor(LIGHTGREEN);
+		circle(x,y,4);
+		setcolor(LIGHTRED);
+		  circle(x,y,3);
+		   circle(x,y,2);
+		     delay(27);
+	    setcolor(BLACK);
+   circle(x,y,7);
+   circle(x,y,6);
+    circle(x,y,5);
+	circle(x,y,4);
+	  circle(x,y,3);
+	    circle(x,y,2);
+	   hh++;
+	   usr=10;
+	   setcolor(RED);
+	   setlinestyle(SOLID_LINE,usr,3);
+	   line(line0,477,line1,477);
+	   //x11=end(line0,line1,x,y);
+	   if(y>445)
+	     {
+	     setcolor(WHITE);
+		line(line0,477,line1,477);
+		mid=(int )(line0+line1)/2;
+		setcolor(YELLOW);
+		line(mid-5,477,mid+5,477);
+	    if(x>=line1 && x<=line0)
+	       {
+		     x11=0;
+		     mid=(int )(line0+line1)/2;
+		     if(x>=mid)
+		     {
+		     x11+=2;
+		     flag2=1;
+		     }
+		     else
+		     if(x<mid)
+		     {
+		     x11+=2;
+		     flag2=2;
+		     }
+		}
+		else
+	       if(x<line1)
+	       {
+		 setcolor(BLACK);
+		     circle(x,y,7);
+		     circle(x,y,6);
+		     circle(x,y,5);
+		     circle(x,y,4);
+		     circle(x,y,3);
+		     circle(x,y,2);
+		     sound(300);
+		     sleep(1);
+		     nosound();
+		     closegraph();
+		     restorecrtmode();
+		     exit(0);
+	       }
+	       else
+	       if(x>line0)
+	       {
+		 setcolor(BLACK);
+		     circle(x,y,7);
+		     circle(x,y,6);
+		     circle(x,y,5);
+		     circle(x,y,4);
+		     circle(x,y,3);
+		     circle(x,y,2);
+		     sound(300);
+		     sleep(1);
+		     nosound();
+		     cleardevice();
+		     closegraph();
+		     restorecrtmode();
+		     exit(0);
+	       }
+
+	  }
+	if((y<470 && flag==0) || y<0 )
+    y+=x1;
+    if(y==474 || y>474)
+    {
+    flag=1;
+    sound(4500);
+    delay(5);
+    nosound();
+    }
+    if((y>6 && flag==1) || y>470)
+    y-=x1;
+    if(y==6 || y<6)
+    {
+    flag=0;
+    sound(4500);
+    delay(2);
+    nosound();
+    }
+    if(flag2==1)
+    {
+    x+=x11;
+    if(x>=630)
+    {
+    flag2=2;
+    sound(4500);
+    delay(2);
+    nosound();
+    }
+    if(x>=630)
+    {
+    flag2=2;
+    sound(4500);
+    delay(2);
+    nosound();
+    }
+    if(x<8)
+    {
+    flag2=1;
+    sound(4500);
+    delay(2);
+    nosound();
+    }
+    }
+    if(flag2==2)
+    {
+    x-=x11;
+    if(x<8)
+    {
+    flag2=1;
+    sound(4500);
+    delay(2);
+    nosound();
+    }
+    }
+    if(kbhit())
+    {
+    setcolor(BLACK);
+	   setlinestyle(SOLID_LINE,usr,3);
+	   line(line0,477,line1,477);
+    ch=getch();
+    if(ch==13)
+    break;
+    if(ch==75)
+    {
+    line0-=22;
+    if(line0<=15)
+    {
+    //line0=6;
+    line0+=22;
+    continue;
+    }
+    line1-=22;
+    }
+    if(ch==77)
+    {
+    line1+=22;
+    if(line1>=638)
+    {
+    //line1=634;
+    line1-=22;
+    continue;
+    }
+    line0+=22;
+    }
+    setcolor(WHITE);
+	   setlinestyle(SOLID_LINE,usr,3);
+	   line(line0,477,line1,477);
+    }
+
+	}
+     closegraph();
+	 restorecrtmode();
+    }
+
+	 void bricks(int posx,int posy,int *flagg)
+	 {
+	      int x1=10,y1=25,x2=70,y2=40,i,j,k=0,cc=5;
+	      static int arr[150][8],flag=0,count=0;
+	      setbkcolor(BLACK);
+	      fflush(stdout);
+	      //setcolor(cc);
+	      //setfillstyle(SOLID_FILL,cc);
+	       for(i=0;i<8;i++)
+	       {
+		 setcolor(cc);
+		 setfillstyle(SOLID_FILL,cc);
+		 for(j=0;j<=9;j++)
+		   {
+		     if(arr[k][4]==0)
+			 if((posx-5>=arr[k][0] && posx-5<=arr[k][2])&&(posy+5>=arr[k][1] && posy+5<=arr[k][3]) || (posx>=arr[k][0] && posx<=arr[k][2])&&(posy>=arr[k][1] && posy<=arr[k][3]) || (posx+5>=arr[k][0] && posx+5<=arr[k][2])&&(posy-5>=arr[k][1] && posy-5<=arr[k][3]))
+			{
+			sound(1500);
+			setbkcolor(BLACK);
+			setcolor(BLACK);
+			rectangle(arr[k][0],arr[k][1],arr[k][2],arr[k][3]);
+			setfillstyle(SOLID_FILL,BLACK);
+			floodfill(arr[k][0]+2,arr[k][1]+2,BLACK);
+			arr[k][4]=1;
+			delay(2);
+			nosound();
+		       if(*flagg==1)
+		       *flagg=0;
+		       else
+		       if(*flagg==0)
+		       *flagg=1;
+		       count++;
+		       if(count==72)
+		       {
+		       sound(2000);
+		       sleep(2);
+		       nosound();
+		       closegraph();
+		       restorecrtmode();
+		       exit(1);
+		       }
+			return(0);
+			}
+		    if(arr[k][4]==0)
+		    {
+		    setcolor(cc);
+		    rectangle(x1,y1,x2,y2);
+		    floodfill(x1+2,y1+2,cc);
+		    }
+		    if(arr[k][4]==1)
+		    {
+		    setcolor(BLACK);
+		    rectangle(x1,y1,x2,y2);
+		    floodfill(x1+2,y1+2,BLACK);
+		    }
+		    if(flag!=1)
+		    {
+		    arr[k][0]=x1;
+		    arr[k][1]=y1;
+		    arr[k][2]=x2;
+		    arr[k][3]=y2;
+		    arr[k][4]=0;
+		    }
+		    x1+=70;
+		    x2+=70;
+		    k++;
+		    }
+		    x1=10;
+		    x2=70;
+		    y1+=20;
+		    y2+=20;
+		    cc++;
+	       }
+	       flag=1;
+	 }
